@@ -18,7 +18,7 @@ const getPublicContent = () => {
 };
 
 const getUserBoard = () => {
-    return instance.get(API_URL + "user");
+    return instance.post(API_URL + "user", data);
 };
 
 const getAdminBoard = () => {

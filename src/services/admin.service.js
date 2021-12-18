@@ -13,21 +13,26 @@ const instance = axios.create({
 const newHome = (homeName) => {
     return instance.post(API_URL + "newhome", { userid, homeName });
 };
-const newRoom = (homeId, roomName) => {
-    return instance.post(API_URL + "newroom", { userid, homeId, roomName });
+const newRoom = (homeName, roomName) => {
+    return instance.post(API_URL + "newroom", { userid, homeName, roomName });
 };
-const newDevice = (homeId, roomId, deviceId, deviceName) => {
+const newDevice = (homeName, roomName, deviceId, deviceName) => {
     return instance.post(API_URL + "newdevice", {
         userid,
-        homeId,
-        roomId,
+        homeName,
+        roomName,
         deviceId,
         deviceName,
     });
+};
+
+const turnon = () => {
+    return instance.post(API_URL + "turnon", { userid });
 };
 
 export default {
     newHome,
     newRoom,
     newDevice,
+    turnon,
 };

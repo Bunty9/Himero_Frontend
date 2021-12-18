@@ -10,7 +10,16 @@ import adminService from "../services/admin.service";
 
 const BoardAdmin = () => {
     const [content, setContent] = useState("");
-
+    const sendTurnOn = () => {
+        adminService.turnon().then(
+            (response) => {
+                alert(response.data);
+            },
+            (error) => {
+                alert(error.message);
+            }
+        );
+    };
     const newHome = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -33,13 +42,10 @@ const BoardAdmin = () => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         // eslint-disable-next-line no-console
-        const homeId = data.get("home_id");
+        const homeName = data.get("home_name");
         const roomName = data.get("room_name");
-        console.log({
-            homeid: homeId,
-            name: roomName,
-        });
-        adminService.newRoom(homeId, roomName).then(
+
+        adminService.newRoom(homeName, roomName).then(
             (response) => {
                 alert(response.data);
             },
@@ -59,17 +65,12 @@ const BoardAdmin = () => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         // eslint-disable-next-line no-console
-        const homeId = data.get("home_id");
-        const roomId = data.get("room_id");
+        const homeName = data.get("home_name");
+        const roomName = data.get("room_name");
         const deviceId = data.get("device_id");
         const deviceName = data.get("device_name");
-        console.log({
-            homeid: homeId,
-            roomid: roomId,
-            deviceid: deviceId,
-            device: deviceName,
-        });
-        adminService.newDevice(homeId, roomId, deviceId, deviceName).then(
+
+        adminService.newDevice(homeName, roomName, deviceId, deviceName).then(
             (response) => {
                 alert(response.data);
             },
@@ -81,7 +82,7 @@ const BoardAdmin = () => {
     useEffect(() => {
         UserService.getAdminBoard().then(
             (response) => {
-                setContent(response.data);
+                setContent(JSON.stringify(response.data));
             },
             (error) => {
                 const _content =
@@ -133,9 +134,9 @@ const BoardAdmin = () => {
                             <TextField
                                 fullWidth
                                 required
-                                id="home_id"
-                                label="Home ID"
-                                name="home_id"
+                                id="home_name"
+                                label="Home Name"
+                                name="home_name"
                                 autoFocus
                                 sx={{
                                     marginBottom: 2,
@@ -168,9 +169,9 @@ const BoardAdmin = () => {
                             <TextField
                                 fullWidth
                                 required
-                                id="home_id"
-                                label="Home ID"
-                                name="home_id"
+                                id="home_name"
+                                label="Home Name"
+                                name="home_name"
                                 autoFocus
                                 sx={{
                                     marginBottom: 2,
@@ -179,9 +180,9 @@ const BoardAdmin = () => {
                             <TextField
                                 fullWidth
                                 required
-                                id="room_id"
-                                label="Room ID"
-                                name="room_id"
+                                id="room_name"
+                                label="Room name"
+                                name="room_name"
                                 autoFocus
                                 sx={{
                                     marginBottom: 2,
@@ -217,6 +218,16 @@ const BoardAdmin = () => {
                             </Button>
                         </Box>
                     </CustomizedDialogs>
+                </Grid>
+                <Grid item xs>
+                    <Button
+                        onClick={sendTurnOn}
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        SEND
+                    </Button>
                 </Grid>
             </Grid>
 
