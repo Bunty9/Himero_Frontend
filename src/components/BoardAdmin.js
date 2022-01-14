@@ -10,16 +10,7 @@ import adminService from "../services/admin.service";
 
 const BoardAdmin = () => {
     const [content, setContent] = useState("");
-    const sendTurnOn = () => {
-        adminService.turnon().then(
-            (response) => {
-                alert(response.data);
-            },
-            (error) => {
-                alert(error.message);
-            }
-        );
-    };
+
     const newHome = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -220,12 +211,7 @@ const BoardAdmin = () => {
                     </CustomizedDialogs>
                 </Grid>
                 <Grid item xs>
-                    <Button
-                        onClick={sendTurnOn}
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                    >
+                    <Button fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                         SEND
                     </Button>
                 </Grid>

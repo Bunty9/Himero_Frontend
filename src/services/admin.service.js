@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://localhost:6969/api/";
+const API_URL = process.env.REACT_APP_BK_URI;
 const userid = JSON.parse(localStorage.getItem("user"))?.id;
 
 const instance = axios.create({
@@ -26,13 +26,18 @@ const newDevice = (homeName, roomName, deviceId, deviceName) => {
     });
 };
 
-const turnon = () => {
-    return instance.post(API_URL + "turnon", { userid });
+const flip = (device_id, deviceid, status) => {
+    return instance.post(API_URL + "turnon", {
+        userid,
+        device_id,
+        deviceid,
+        status,
+    });
 };
 
 export default {
     newHome,
     newRoom,
     newDevice,
-    turnon,
+    flip,
 };

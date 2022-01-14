@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-
+import styled from "styled-components";
 import UserService from "../services/user.service";
+import CustomButton from "./CustomButton";
 
 const BoardUser = () => {
     const [content, setContent] = useState("");
@@ -8,7 +9,7 @@ const BoardUser = () => {
     useEffect(() => {
         UserService.getUserBoard().then(
             (response) => {
-                setContent(Array.from(response.data));
+                setContent(response.data);
             },
             (error) => {
                 const _content =
@@ -23,25 +24,34 @@ const BoardUser = () => {
         );
     }, []);
     console.log(content);
-    const display = Object.keys(content).map((d, key) => {
+
+    const display = Object.keys(content).map((key) => {
         return (
-            <div className="my-posts">
-                <li key={key}>{content[key].housename}</li>
-                {Object.keys(content[key]).map((i) => {
-                    return <li key={i}>{content[key][i]?.roomname}</li>;
+            <Home className="my-posts">
+                <HouseName>{content[key][0].housename}</HouseName>
+                {content[key][1].map((item) => {
+                    return (
+                        <Room>
+                            <RoomName>{item?.roomname}</RoomName>
+                            {item?.device.map((device) => {
+                                return (
+                                    <CustomButton
+                                        device_id={device._id}
+                                        deviceid={device.deviceid}
+                                        devicename={device.devicename}
+                                    >
+                                        {device.devicename}
+                                    </CustomButton>
+                                );
+                            })}
+                        </Room>
+                    );
                 })}
-            </div>
+            </Home>
         );
     });
 
-    return (
-        <div className="container">
-            <header className="jumbotron">
-                <h3>User Data</h3>
-            </header>
-            {display}
-        </div>
-    );
+    return <div className="container">{display}</div>;
 };
 
 export default BoardUser;
@@ -51,3 +61,33 @@ export default BoardUser;
 //create new device
 
 // device service manager to handle axois post requests
+
+// room
+
+const HouseName = styled.p`
+    padding: 10px;
+    font-family: Montserrat;
+    font-size: 30px;
+    text-transform: uppercase;
+    font-weight: 600;
+`;
+
+const Home = styled.div``;
+const Room = styled.div`
+    display: flex;
+    margintop: 0;
+`;
+
+const RoomName = styled.p`
+    padding: 10px;
+    font-family: Montserrat;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-left: 30px;
+`;
+// const Device = styled(CustomButton)`
+//     margin: 2em;
+//     max-width: 150px;
+//     margin-left: 10px;
+// `;
