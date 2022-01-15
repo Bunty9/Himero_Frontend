@@ -27,15 +27,20 @@ const BoardUser = () => {
 
     const display = Object.keys(content).map((key) => {
         return (
-            <Home className="my-posts">
-                <HouseName>{content[key][0].housename}</HouseName>
-                {content[key][1].map((item) => {
+            <Home key={content[key][0]?.housename} className="my-posts">
+                <HouseName key={content[key][0]?.housename}>
+                    {content[key][0]?.housename}
+                </HouseName>
+                {content[key][1]?.map((item) => {
                     return (
-                        <Room>
-                            <RoomName>{item?.roomname}</RoomName>
+                        <Room key={item?.roomname}>
+                            <RoomName key={item?.roomname}>
+                                {item?.roomname}
+                            </RoomName>
                             {item?.device.map((device) => {
                                 return (
                                     <CustomButton
+                                        key={device._id}
                                         device_id={device._id}
                                         deviceid={device.deviceid}
                                         devicename={device.devicename}
