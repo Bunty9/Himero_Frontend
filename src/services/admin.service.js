@@ -34,7 +34,7 @@ const flip = (device_id, deviceid, status) => {
         status,
     });
 };
-
+// eslint-disable-next-line
 export default {
     newHome,
     newRoom,

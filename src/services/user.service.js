@@ -24,7 +24,7 @@ const getUserBoard = () => {
 const getAdminBoard = () => {
     return instance.post(API_URL + "admin", data);
 };
-
+// eslint-disable-next-line
 export default {
     getPublicContent,
     getUserBoard,
