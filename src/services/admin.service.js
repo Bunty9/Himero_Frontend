@@ -25,10 +25,13 @@ const newDevice = (homeName, roomName, deviceId, deviceName) => {
         deviceName,
     });
 };
-
-const flip = (device_id, deviceid, status) => {
-    return instance.post(API_URL + "turnon", {
+const shareHome = (homeName, userName) => {
+    return instance.post(API_URL + "sharehome", { userid, homeName, userName });
+};
+const flip = (roomid, device_id, deviceid, status) => {
+    return instance.post(API_URL + "flip", {
         userid,
+        roomid,
         device_id,
         deviceid,
         status,
@@ -39,5 +42,6 @@ export default {
     newHome,
     newRoom,
     newDevice,
+    shareHome,
     flip,
 };

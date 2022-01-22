@@ -70,6 +70,22 @@ const BoardAdmin = () => {
             }
         );
     };
+
+    const shareHome = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        // eslint-disable-next-line no-console
+        const homeName = data.get("home_name");
+        const userName = data.get("username");
+        adminService.shareHome(homeName, userName).then(
+            (response) => {
+                alert(response.data);
+            },
+            (error) => {
+                alert(error.message);
+            }
+        );
+    };
     useEffect(() => {
         UserService.getAdminBoard().then(
             (response) => {
@@ -216,6 +232,38 @@ const BoardAdmin = () => {
                     </Button>
                 </Grid>
             </Grid>
+            <CustomizedDialogs title="Share Home">
+                <Box component="form" onSubmit={shareHome}>
+                    <TextField
+                        fullWidth
+                        required
+                        id="home_name"
+                        label="Home Name"
+                        name="home_name"
+                        autoFocus
+                        sx={{
+                            marginBottom: 2,
+                        }}
+                    />
+
+                    <TextField
+                        fullWidth
+                        required
+                        id="username"
+                        label="Username"
+                        name="username"
+                        autoFocus
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Submit
+                    </Button>
+                </Box>
+            </CustomizedDialogs>
 
             <h3>{content}</h3>
         </div>

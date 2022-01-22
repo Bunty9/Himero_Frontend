@@ -11,6 +11,7 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardAdmin from "./components/BoardAdmin";
+import BoardShare from "./components/BoardShare";
 
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
@@ -68,6 +69,14 @@ const App = () => {
                                 </Link>
                             </li>
                         )}
+
+                        {currentUser && (
+                            <li className="nav-item">
+                                <Link to={"/shared"} className="nav-link">
+                                    Shared
+                                </Link>
+                            </li>
+                        )}
                     </div>
 
                     {currentUser ? (
@@ -111,6 +120,7 @@ const App = () => {
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/profile" component={Profile} />
                         <Route path="/user" component={BoardUser} />
+                        <Route path="/shared" component={BoardShare} />
                         <Route path="/admin" component={BoardAdmin} />
                     </Switch>
                 </div>

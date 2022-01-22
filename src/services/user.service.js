@@ -21,6 +21,10 @@ const getUserBoard = () => {
     return instance.post(API_URL + "user", data);
 };
 
+const getSharedBoard = () => {
+    return instance.post(API_URL + "shared", data);
+};
+
 const getAdminBoard = () => {
     return instance.post(API_URL + "admin", data);
 };
@@ -28,5 +32,6 @@ const getAdminBoard = () => {
 export default {
     getPublicContent,
     getUserBoard,
+    getSharedBoard,
     getAdminBoard,
 };

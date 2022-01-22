@@ -4,10 +4,10 @@ import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 
 const CustomButton = (props) => {
-    const [selected, setSelected] = React.useState(false);
+    const [selected, setSelected] = React.useState(props?.status);
     const toggle = async () => {
         await adminService
-            .flip(props.device_id, props.deviceid, !selected)
+            .flip(props.roomid,props.device_id, props.deviceid, !selected)
             .then(
                 (response) => {
                     console.log(response.data);

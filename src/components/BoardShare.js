@@ -7,7 +7,7 @@ const BoardUser = () => {
     const [content, setContent] = useState("");
 
     useEffect(() => {
-        UserService.getUserBoard().then(
+        UserService.getSharedBoard().then(
             (response) => {
                 setContent(response.data);
             },
@@ -41,11 +41,9 @@ const BoardUser = () => {
                                 return (
                                     <CustomButton
                                         key={device._id}
-                                        roomid={item._id}
                                         device_id={device._id}
                                         deviceid={device.deviceid}
                                         devicename={device.devicename}
-                                        status={device.devicestatus}
                                     >
                                         {device.devicename}
                                     </CustomButton>
