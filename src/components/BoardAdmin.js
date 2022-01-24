@@ -226,11 +226,6 @@ const BoardAdmin = () => {
                         </Box>
                     </CustomizedDialogs>
                 </Grid>
-                <Grid item xs>
-                    <Button fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                        SEND
-                    </Button>
-                </Grid>
             </Grid>
             <CustomizedDialogs title="Share Home">
                 <Box component="form" onSubmit={shareHome}>
@@ -265,7 +260,7 @@ const BoardAdmin = () => {
                 </Box>
             </CustomizedDialogs>
 
-            <h3>{content}</h3>
+            {/* <h3>{content}</h3> */}
         </div>
     );
 };

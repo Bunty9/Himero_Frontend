@@ -45,7 +45,7 @@ const App = () => {
             <div>
                 <nav className="navbar navbar-expand navbar-dark bg-dark">
                     <Link to={"/"} className="navbar-brand">
-                        HIMERO
+                        BT-50
                     </Link>
                     <div className="navbar-nav mr-auto">
                         <li className="nav-item">
